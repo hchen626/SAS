@@ -88,7 +88,7 @@ run;
      
      do until (eof1);                              /* LOOP to read records from the lookup table */
          set mylookuptable end=eof1;               /* Use my lookup table; eof1 is to let me know when i reached the last row in lookup table */
-         rc = plan.add()                           /* add each record from lookup table to hash table */
+         rc = plan.add();                          /* add each record from lookup table to hash table */
      end;
      
      do until (eof2);                              /* LOOP to read records from my master data */
