@@ -1,4 +1,4 @@
-Example uses of HASH in SAS. HASH is leveraged in the background for PROC SQL when you perform INNER JOINs.
+Example uses HASH in SAS. HASH is leveraged in the background for PROC SQL when you perform INNER JOINs.
 
 However, PROC SQL does not leverage Hash when it comes to OUTER JOINs
 
