@@ -37,6 +37,7 @@ select
         on a.KEY = b.KEY
  GROUP BY 1
  ;
+ quit;
  
  /****** assume the lookup table as two field *******/
  
@@ -51,19 +52,19 @@ select
  
 data results (KEEP=valid invalid);
      declare HASH lookup ();                       /* Declare the name of Hash object called Lookup */
-     rc = lookup.DefineKey('KEY')                  /* Identify the field to use as key (what used in both master and lookup table*/
-     rc = lookup.DefineData('KEY_DESCRIPTION')     /* Identify fields to use as data, i.e., lookup column want to bring into Master */
-     rc = lookup.DefineDone()                        /* Complete the hash definition */
+     rc = lookup.DefineKey('KEY');                 /* Identify the field to use as key (what used in both master and lookup table*/
+     rc = lookup.DefineData('KEY_DESCRIPTION');    /* Identify fields to use as data, i.e., lookup column want to bring into Master */
+     rc = lookup.DefineDone();                     /* Complete the hash definition */
      
      do until (eof1);                              /* LOOP to read records from the lookup table */
          set mylookuptable end=eof1;               /* Use my lookup table; eof1 is to let me know when i reached the last row in lookup table */
-         rc = plan.add()                           /* add each record from lookup table to hash table */
+         rc = plan.add();                          /* add each record from lookup table to hash table */
      end;
      
      retain valid invalid 0;                       /* Retain values from one obs to the next iteration during SAS data step, initialize to 0 */
      do until (eof2);                              /* LOOP to read records from my master data */
          set mymaster end=eof2;
-         rc = lookup.find()                        /* Lookup each key's value in the Hash array */
+         rc = lookup.find();                       /* Lookup each key's value in the Hash array */
          
          if rc=0 then do;                          /* IF key is found (then rc returns 0) */
              valid + 1;                            /* INCREMENT THE MATCH counter */
@@ -81,9 +82,9 @@ run;
  
  data master_with_label (DROP=rc);
      declare HASH lookup ();                       /* Declare the name of Hash object called Lookup */
-     rc = lookup.DefineKey('KEY')                  /* Identify the field to use as key (what used in both master and lookup table*/
-     rc = lookup.DefineData('KEY_DESCRIPTION')     /* Identify fields to use as data, i.e., lookup column want to bring into Master */
-     rc = lookup.DefineDone()                        /* Complete the hash definition */
+     rc = lookup.DefineKey('KEY');                 /* Identify the field to use as key (what used in both master and lookup table*/
+     rc = lookup.DefineData('KEY_DESCRIPTION');    /* Identify fields to use as data, i.e., lookup column want to bring into Master */
+     rc = lookup.DefineDone();                     /* Complete the hash definition */
      
      do until (eof1);                              /* LOOP to read records from the lookup table */
          set mylookuptable end=eof1;               /* Use my lookup table; eof1 is to let me know when i reached the last row in lookup table */
@@ -93,7 +94,7 @@ run;
      do until (eof2);                              /* LOOP to read records from my master data */
          set mymaster end=eof2;
          call missing(key_description);            /* Initialize the variable we intend to fill; In case we can't find, it's missing/null in Master */
-         rc = lookup.find()                        /* Lookup each key's value in the Hash array */
+         rc = lookup.find();                       /* Lookup each key's value in the Hash array */
          output;                                   /* output what was found in hash array to master data */
      end;
      
