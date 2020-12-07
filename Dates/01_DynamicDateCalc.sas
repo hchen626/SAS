@@ -1,4 +1,4 @@
-%LET MONTHS_AGO = -4  /* HOW MANY PREVIOUS MONTHS AGO FROM TODAY */
+%LET MONTHS_AGO = -4;  /* HOW MANY PREVIOUS MONTHS AGO FROM TODAY */
 
 %LET DATE_TODAY      = %SYSFUNC(TODAY());                                                   /*    DDMONYYYY   */
 %LET MONTH_END_DT    = %SYSFUNC(INTNX(MONTH, &DATE_TODAY., &MONTHS_AGO., E), DATE9.);       /*    DDMONYYYY   */
