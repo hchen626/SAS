@@ -1,8 +1,8 @@
 %LET MONTHS_AGO = -4;  /* HOW MANY PREVIOUS MONTHS AGO FROM TODAY */
 
 %LET DATE_TODAY      = %SYSFUNC(TODAY());                                                   /*    DDMONYYYY   */
-%LET MONTH_END_DT    = %SYSFUNC(INTNX(MONTH, &DATE_TODAY., &MONTHS_AGO., E), date9.);       /*    DDMONYYYY   */
 %LET MONTH_START_DT  = %SYSFUNC(INTNX(MONTH, &DATE_TODAY., &MONTHS_AGO., B), date9.);       /*    DDMONYYYY   */
+%LET MONTH_END_DT    = %SYSFUNC(INTNX(MONTH, &DATE_TODAY., &MONTHS_AGO., E), date9.);       /*    DDMONYYYY   */
 %LET MONTH_TODAY_DT  = %SYSFUNC(TODAY(), date9.);                                           /*    DDMONYYYY   */                    
 
 /* TO BE USED FOR FILTERTING DATASETS AND NAMING DATASETS */
